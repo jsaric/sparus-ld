@@ -1,0 +1,46 @@
+MODEL:
+  BACKBONE:
+    TYPE: 'ResNet'
+    ResNet:
+      DEPTH: 18
+      WEIGHTS: "IMAGENET1K_V1"
+DATASETS:
+  TRAIN: "SPAUR_1152x768"
+  TRAIN_SPLIT: "train"
+  VAL: "SPAUR_1152x768"
+  VAL_SPLIT: "val"
+INPUT:
+  SIZE: [768, 1152]
+  CROP_TYPE: "center"
+  RANDOM_ERASE:
+    ENABLED: False
+  RANDOM_SHORTER_SIDE:
+    ENABLED: True
+    MIN_SIZE: (512, 960)
+    MAX_SIZE: 1440
+  COLOR_JITTER:
+    ENABLED: True
+    BRIGHTNESS: (0.7, 1.3)
+    CONTRAST: (0.75, 1.25)
+    SATURATION: (0.75, 1.25)
+    HUE: (-0.17, 0.17)
+  NORMALIZE: True
+OPTIMIZER:
+  LR: 0.001
+  SCHEDULER:
+    TYPE: "ExpLR"
+    STEP_INTERVAL: 125
+    EXPLR:
+      GAMMA: 0.98
+TRAINER:
+  NUM_WORKERS: 4
+  EVAL_INTERVAL: 2500
+  LOG_INTERVAL: 20
+  CHECKPOINT_INTERVAL: 2500
+  ITERATIONS: 30000
+LOSS:
+  TYPE: "bce"
+  TOP_K_PERCENT_PIXELS: 0.1
+  SIGMA: 7.0
+EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator")
+OUTPUT_DIR: "output/r18_spaur_1152x768_hpm10"
