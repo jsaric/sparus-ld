@@ -9,7 +9,7 @@ def build_train_dataset(cfg):
         res = dataset_name.split("_")[1]
         dataset = SPAURKeypointDataset(
             root_path=f"./datasets/SPAUR/res_{res}",
-            split='train',
+            split=cfg.DATASETS.TRAIN_SPLIT,
             transform=transform,
         )
     else:

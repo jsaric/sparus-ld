@@ -3,10 +3,9 @@ from vis_utils import draw_keypoints
 
 
 class VisualizationEvaluator:
-    def __init__(self, cfg):
+    def __init__(self, output_dir):
         super().__init__()
-        self.cfg = cfg
-        self.output_dir = Path(cfg.OUTPUT_DIR) / "vis_results"
+        self.output_dir = output_dir
         self.output_dir.mkdir(exist_ok=True, parents=True)
 
     def update(self, preds, targets):

@@ -2,19 +2,16 @@ MODEL:
   BACKBONE:
     TYPE: 'ResNet'
     ResNet:
-      DEPTH: 50
+      DEPTH: 18
       WEIGHTS: "IMAGENET1K_V1"
-  DECODER:
-    INPUT_CHANNELS: 2048
-    SKIP_CHANNELS: [ 1024, 512, 256 ]
 DATASETS:
   TRAIN: "SPAUR_1152x768"
-  TRAIN_SPLIT: "train"
+  TRAIN_SPLIT: "train_100"
   VAL: "SPAUR_1152x768"
   VAL_SPLIT: "val"
 INPUT:
   SIZE: [768, 1152]
-  CROP_TYPE: "center"
+  CROP_TYPE: "random"
   RANDOM_ERASE:
     ENABLED: True
   RANDOM_SHORTER_SIDE:
@@ -27,6 +24,9 @@ INPUT:
     CONTRAST: (0.75, 1.25)
     SATURATION: (0.75, 1.25)
     HUE: (-0.17, 0.17)
+  RANDOM_ROTATION:
+    ENABLED: True
+    ANGLE: 3
   NORMALIZE: True
 OPTIMIZER:
   LR: 0.001
@@ -40,11 +40,10 @@ TRAINER:
   EVAL_INTERVAL: 2500
   LOG_INTERVAL: 20
   CHECKPOINT_INTERVAL: 2500
-  ITERATIONS: 40000
+  ITERATIONS: 5000
 LOSS:
   TYPE: "bce"
-  TOP_K_PERCENT_PIXELS: 0.1
+  TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
-EVALUATION:
-  EVALUATORS: ("euclidean_distance_evaluator", "keypoint_similarity_evaluator")
-OUTPUT_DIR: "output/r50_spaur_1152x768_all_jitter_hpm010"
+EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator")
+OUTPUT_DIR: "output/testing"

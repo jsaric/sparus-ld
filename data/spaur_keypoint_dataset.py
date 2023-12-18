@@ -24,7 +24,7 @@ def _classification_from_image_name(image_name):
 
 
 class SPAURKeypointDataset(Dataset):
-    KEYPOINT_NAMES = [
+    KEYPOINT_NAMES_SIMPLE = [
         'mouth',
         'forehead',
         'topFinLeft',
@@ -45,6 +45,27 @@ class SPAURKeypointDataset(Dataset):
         'eyeRight'
     ]
 
+    KEYPOINT_NAMES = [
+        "anterior tip of snout at the upper jaw",
+        "vertical point above the most anterior point in the eye",
+        "anterior insertion of the dorsal fin",
+        "last spiny ray of the dorsal fin",
+        "posterior insertion of the dorsal fin",
+        "dorsal point at the least depth of the caudal peduncle",
+        "posterior body extremity",
+        "ventral point at the least depth of the caudal peduncle",
+        "posterior insertion of the anal fin",
+        "anterior insertion of the anal fin",
+        "insertion of the pelvic fin",
+        "ventral tip of the insertion of the operculum on the lateral profile",
+        "point of maximum extension of the operculum on the lateral profile",
+        "anterior extremity of the lateral line on the head profile",
+        "dorsal insertion of the pectoral fin",
+        "ventral insertion of the pectoral fin",
+        "the most anterior point in the eye",
+        "the most posterior point in the eye",
+    ]
+
     def __init__(self, root_path, split, transform=None):
         self.root_path = Path(root_path)
         self.split = split
@@ -53,6 +74,7 @@ class SPAURKeypointDataset(Dataset):
         self.tps_items = tps_file.images
         self.train = split == 'train'
         self.transform = transform
+        print(f"Loaded dataset with split {self.split} that contains {len(self)} images")
 
     def __len__(self):
         return len(self.tps_items)
@@ -78,6 +100,8 @@ class SPAURKeypointDataset(Dataset):
             "class": _classification_from_image_name(image_name),
             "image_path": (self.image_dir / image_name).__str__(),
             "scale": -1 if tps_item.scale is None else tps_item.scale,
+            "id_number": tps_item.id_number,
+            "image_name": image_name,
         })
         datum["keypoints"] = datum["keypoints"][:, :2].float()
         return datum

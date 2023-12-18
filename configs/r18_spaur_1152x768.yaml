@@ -11,9 +11,9 @@ DATASETS:
   VAL_SPLIT: "val"
 INPUT:
   SIZE: [768, 1152]
-  CROP_TYPE: "center"
+  CROP_TYPE: "random"
   RANDOM_ERASE:
-    ENABLED: False
+    ENABLED: True
   RANDOM_SHORTER_SIDE:
     ENABLED: True
     MIN_SIZE: (512, 960)
@@ -24,6 +24,9 @@ INPUT:
     CONTRAST: (0.75, 1.25)
     SATURATION: (0.75, 1.25)
     HUE: (-0.17, 0.17)
+  RANDOM_ROTATION:
+    ENABLED: True
+    ANGLE: 3
   NORMALIZE: True
 OPTIMIZER:
   LR: 0.001
@@ -40,7 +43,8 @@ TRAINER:
   ITERATIONS: 30000
 LOSS:
   TYPE: "bce"
-  TOP_K_PERCENT_PIXELS: 0.1
+  TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
-EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator")
-OUTPUT_DIR: "output/r18_spaur_1152x768_hpm10"
+EVALUATION:
+  EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
+OUTPUT_DIR: "output/r18_spaur_1152x768_bce_all_jitter_hpm010"

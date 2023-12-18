@@ -87,7 +87,9 @@ _C.MODEL.DECODER.SWIFTNET_DECODDER.SPP_GRIDS = (8, 4, 2, 1)
 _C.MODEL.DECODER.SWIFTNET_DECODDER.SPP_BOTTLENECK_SIZE = 512
 _C.MODEL.DECODER.SWIFTNET_DECODDER.SPP_LEVEL_SIZE = 128
 
-_C.EVALUATORS = ("euclidean_distance_evaluator", )
+_C.EVALUATION = CN()
+_C.EVALUATION.EVALUATORS = ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
+_C.EVALUATION.TPS_SAVER_SCALING_FACTOR = 1.0
 
 
 
