@@ -44,4 +44,5 @@ LOSS:
   TOP_K_PERCENT_PIXELS: 0.10
 EVALUATION:
   EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator")
+
 OUTPUT_DIR: "output/r18_res_768x512_bce_zavada_best_hpm10_randomcrop"

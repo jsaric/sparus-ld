@@ -34,8 +34,8 @@ class KeypointSimilarityEvaluator(Evaluator):
     def nice_print(self, results):
         print(f"Per keypoint similarity (sigma = {self.sigma}):")
         for i, keypoint_name in enumerate(self.keypoint_names):
-            print(f"{i+1}.\t{keypoint_name:<25} {results[f'{keypoint_name}_keypoint_similarity']:0.2f}")
-        print(f"Average keypoint similarity (sigma = {self.sigma}): \t {results['average_keypoint_similarity']:0.2f}")
+            print(f"{i+1}.\t{keypoint_name:<25} {results[f'{keypoint_name}_keypoint_similarity']:0.3f}")
+        print(f"Average keypoint similarity (sigma = {self.sigma}): \t {results['average_keypoint_similarity']:0.3f}")
 
     def reset(self):
         self.similarities = np.zeros(self.num_keypoints)

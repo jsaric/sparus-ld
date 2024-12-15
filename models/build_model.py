@@ -1,6 +1,7 @@
 from models.resnet import resnet18, resnet34, resnet50, ResNet18_Weights, ResNet34_Weights, ResNet50_Weights
 from models.swiftnet_decoder import SwiftNetDecoder
 from models.keypoint_detector import KeypointDetector
+from models.upernet_decoder import UperNetDecoder
 
 
 def build_decoder(cfg):
@@ -14,6 +15,14 @@ def build_decoder(cfg):
             spp_grids=cfg.MODEL.DECODER.SWIFTNET_DECODDER.SPP_GRIDS,
             spp_bottleneck_size=cfg.MODEL.DECODER.SWIFTNET_DECODDER.SPP_BOTTLENECK_SIZE,
             spp_level_size=cfg.MODEL.DECODER.SWIFTNET_DECODDER.SPP_LEVEL_SIZE
+        )
+    elif cfg.MODEL.DECODER.TYPE == "UperNet":
+        decoder = UperNetDecoder(
+            in_channels=cfg.MODEL.DECODER.INPUT_CHANNELS,
+            in_key=cfg.MODEL.DECODER.IN_KEY,
+            skip_channels=cfg.MODEL.DECODER.SKIP_CHANNELS,
+            skip_keys=cfg.MODEL.DECODER.SKIP_KEYS,
+            decoder_channels=cfg.MODEL.DECODER.DECODER_CHANNELS,
         )
     else:
         raise NotImplementedError

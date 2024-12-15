@@ -46,5 +46,6 @@ LOSS:
   TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
 EVALUATION:
-  EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
-OUTPUT_DIR: "output/r18_spaur_1152x768_bce_all_jitter_hpm010"
+  EVALUATORS: ("euclidean_distance_evaluator", "keypoint_similarity_evaluator", "tps_file_saver") #, "visualization_evaluator")
+  SAVE_HEATMAPS_VIS: True
+OUTPUT_DIR: "output/test"
