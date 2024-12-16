@@ -53,24 +53,38 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">SPARUS-LD:<br>Gilthead Seabream (Sparus aurata) Landmark Detection</h1>
-            <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
+            <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Igor Talijančić</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Josip Šarić</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Siniša Šegvić</a>
-                  </span>
-                  </div>
+                <a target="_blank">Igor Talijančić</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://jsaric.github.io/" target="_blank">Josip Šarić</a><sup>2,3</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank">Josip Zavada</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank">Luka Žuvić</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.zemris.fer.hr/~ssegvic/" target="_blank">Siniša Šegvić</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank">Tanja Šegvić-Bubić</a><sup>1</sup>
+              </span>
+            </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Institution Name<br>Conferance name and year</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>Institute of Oceanography and Fisheries<br>
+                <sup>2</sup>University of Zagreb, Faculty of Electrical Engineering and Computing<br>
+                <sup>3</sup>University of Ljubljana, Faculty of Computer and Information Science
+              </span>
+            </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
+            <div class="column has-text-centered">
+              <div class="publication-links">
                          <!-- Arxiv PDF link -->
 <!--                      <span class="link-block">-->
 <!--                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"-->
@@ -94,8 +108,7 @@
                 </span>
 <!--                     Supplementary PDF link -->
                 <span class="link-block">
-                  <a href="static/pdfs/.pdf" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
+                  <a href="#Dataset" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="fas fa-database"></i>
                   </span>
@@ -146,7 +159,8 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+The gilthead seabream training dataset consists of 1,084 adult specimens collected from three distinct origins along the eastern Adriatic Sea as part of the AQUAPOP project (https://jadran.izor.hr/~tsegvic/aquapop/): wild (XXX specimens), farm-associated (XXX specimens), and farmed (XXX specimens). Upon completion of the AQUAPOP project, an additional 720 adult specimens were collected from the same geographical area in the period 2017 to 2022. The dataset consists of 206 farm-associated specimens, 324 farmed specimens, 190 wild specimens of gilthead seabream and was designated as the test set.
+Although the present study focuses on a single species, the dataset presents a challenge for automatic landmark placement due to the subtle but important morphological differences between the three origins (Šegvić-Bubić et al., 2014; Talijančić et al., 2019; 2021). Wild gilthead seabream typically has an elongated, spindle-shaped body form with a larger head profile and a subterminal positioned mouth while farm-associated specimens have a bulkier body, lower positioned nape and a thicker trunk area. Farmed specimens have the most pronounced morphology, characterized by a stockier body with contracted trunks and head regions. These origin-specific morphological differences are influenced by environmental conditions, feeding behaviour and genetic factors arising from different rearing conditions and selective breeding programs (Šegvić-Bubić et al., 2014; Žužul et al., 2019; Talijančić et al., 2019; 2021) and pose a complex problem that challenges both automated and manual digitization methods in terms of appropriate landmark placement. Classification of gilthead seabream based on their origin is further complicated by the species pronounced plasticity which allows for adaptive phenotypic responses to changing environmental conditions. Such trait by itself sets gilthead seabream apart from other aquaculture-relevant fish species just in terms of the sheer magnitude of possible morphological expressions, e.g. head profiles (Brown, 2004). Consequently, increased variability can obscure the identification of homologous landmarks which represent a critical aspect in the design of any geometric morphometrics study (Zelditch et al., 2012). In the context of exploring intraspecific variation in fish species, the dataset used in the present study can serve as a starting point for robust assessment and comparison of measurement errors in landmark placement between automated machine-learning models and human digitization performance.
           </p>
         </div>
       </div>
@@ -276,38 +290,96 @@
   <section class="section" id="Dataset">
     <div class="container is-max-desktop content">
       <h2 class="title">Dataset</h2>
-      18 landmarks:
-        <ul>
- <ol>
-  <li>anterior tip of snout at the upper jaw</li>
-  <li>vertical point above the most anterior point in the eye</li>
-  <li>anterior insertion of the dorsal fin</li>
-  <li>last spiny ray of the dorsal fin</li>
-  <li>posterior insertion of the dorsal fin</li>
-  <li>dorsal point at the least depth of the caudal peduncle</li>
-  <li>posterior body extremity</li>
-  <li>ventral point at the least depth of the caudal peduncle</li>
-  <li>posterior insertion of the anal fin</li>
-  <li>anterior insertion of the anal fin</li>
-  <li>insertion of the pelvic fin</li>
-  <li>ventral tip of the insertion of the operculum on the lateral profile</li>
-  <li>point of maximum extension of the operculum on the lateral profile</li>
-  <li>anterior extremity of the lateral line on the head profile</li>
-  <li>dorsal insertion of the pectoral fin</li>
-  <li>ventral insertion of the pectoral fin</li>
-  <li>the most anterior point in the eye</li>
-  <li>the most posterior point in the eye</li>
-</ol>
-<!--      <pre>aaa</pre>-->
-<!--      <pre><code>BibTex Code Here</code></pre>-->
+        <p>
+          <strong>SPARUS-LD</strong> dataset contains <strong>2053 high-resolution images</strong>
+          of gilthead seabream (Sparus aurata) specimens
+          annotated with <strong>18 landmarks/keypoints</strong>.
+            Additionally, each specimen is associated with one of the <strong>three classes</strong> according to its origin:
+            <strong>wild</strong>, <strong>farmed</strong>, or <strong>farm-associated</strong>.
+          Descriptions of the landmarks are as follows:
+      <ol>
+          <li>anterior tip of snout at the upper jaw</li>
+          <li>vertical point above the most anterior point in the eye</li>
+          <li>anterior insertion of the dorsal fin</li>
+          <li>last spiny ray of the dorsal fin</li>
+          <li>posterior insertion of the dorsal fin</li>
+          <li>dorsal point at the least depth of the caudal peduncle</li>
+          <li>posterior body extremity</li>
+          <li>ventral point at the least depth of the caudal peduncle</li>
+          <li>posterior insertion of the anal fin</li>
+          <li>anterior insertion of the anal fin</li>
+          <li>insertion of the pelvic fin</li>
+          <li>ventral tip of the insertion of the operculum on the lateral profile</li>
+          <li>point of maximum extension of the operculum on the lateral profile</li>
+          <li>anterior extremity of the lateral line on the head profile</li>
+          <li>dorsal insertion of the pectoral fin</li>
+          <li>ventral insertion of the pectoral fin</li>
+          <li>the most anterior point in the eye</li>
+          <li>the most posterior point in the eye</li>
+        </ol>
+      </p>
+      <p>
+        We split the dataset into training, validation and test sets. The table below shows the distribution of origin in each set.
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>Origin</th>
+                <th class="has-text-centered">Training</th>
+                <th class="has-text-centered">Validation</th>
+                <th class="has-text-centered">Test</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Wild</td>
+                <td class="has-text-centered">419</td>
+                <td class="has-text-centered">97</td>
+                <td class="has-text-centered">190</td>
+            </tr>
+            <tr>
+                <td>Farmed</td>
+                <td class="has-text-centered">412</td>
+                <td class="has-text-centered">100</td>
+                <td class="has-text-centered">324</td>
+            </tr>
+            <tr>
+                <td>Farm-associated</td>
+                <td class="has-text-centered">254</td>
+                <td class="has-text-centered">51</td>
+                <td class="has-text-centered">206</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td class="has-text-centered"><strong>1085</strong></td>
+                <td class="has-text-centered"><strong>248</strong></td>
+                <td class="has-text-centered"><strong>720</strong></td>
+            </tr>
+            </tbody>
+        </table>
+        </p>
+        <p>
+            The downsampled version of the dataset (images resized to 1152x768 pixels) is available for download at the following link:
+            <a href="https://drive.google.com/file/d/1" target="_blank">SPARUS-LD Dataset</a>
+            <br>If you are interested in the dataset with full resolution images (5184x3456 pixels), please contact us via <a href="mailto:josipx.saricx@xferx.hr"
+    onmouseover="this.href=this.href.replace(/x/g,'');">e-mail</a>.
+        </p>
     </div>
 </section>
 
 <!--BibTex citation -->
+
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
+        <p>
+            If you use our dataset in your research, please cite the following:
+      <pre><code>
+@misc{sparus-ld,
+  title={SPARUS-LD: Gilthead Seabream (Sparus aurata) Landmark Detection},
+  author={Igor Talijančić and Josip Šarić and Josip Zavada and Luka Žuvić and Siniša Šegvić and Tanja Šegvić-Bubić},
+  year={2024},
+}
+    </code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
