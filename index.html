@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <meta name="description" content="SPARUS-LD contains more than 2000 images of gilthead seabream (sparus aurata) labeled with 18 landmarks.">
+  <meta property="og:title" content="Gilthead seabream landmark detection"/>
+  <meta property="og:description" content="SPARUS-LD contains more than 2000 images of gilthead seabream (sparus aurata) labeled with 18 landmarks."/>
+  <meta property="og:url" content="https://jsaric.github.io/sparus-ld/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+  <meta property="og:image" content="static/images/wild1.JPG" />
+  <meta property="og:image:width" content="1152"/>
+  <meta property="og:image:height" content="768"/>
 
 
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <meta name="twitter:title" content="Gilthead seabream landmark detection">
+  <meta name="twitter:description" content="SPARUS-LD contains more than 2000 images of gilthead seabream (sparus aurata) labeled with 18 landmarks.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -45,9 +45,61 @@
   <script src="static/js/index.js"></script>
 </head>
 <body>
+<script>
+    async function load_and_show_keypoints(filePath, container_id) {
+        // Keypoint descriptions stored inside the function
+        const descriptions = [
+            '1. anterior tip of snout at the upper jaw',
+            '2. vertical point above the most anterior point in the eye',
+            '3. anterior insertion of the dorsal fin',
+            '4. last spiny ray of the dorsal fin',
+            '5. posterior insertion of the dorsal fin',
+            '6. dorsal point at the least depth of the caudal peduncle',
+            '7. posterior body extremity',
+            '8. ventral point at the least depth of the caudal peduncle',
+            '9. posterior insertion of the anal fin',
+            '10. anterior insertion of the anal fin',
+            '11. insertion of the pelvic fin',
+            '12. ventral tip of the insertion of the operculum on the lateral profile',
+            '13. point of maximum extension of the operculum on the lateral profile',
+            '14. anterior extremity of the lateral line on the head profile',
+            '15. dorsal insertion of the pectoral fin',
+            '16. ventral insertion of the pectoral fin',
+            '17. the most anterior point in the eye',
+            '18. the most posterior point in the eye'
+        ];
 
+        // Fetch and parse the keypoint coordinates from the file
+        const response = await fetch(filePath);
+        const text = await response.text();
+        const keypoints = text.trim().split('\n').map(line => {
+            const [x, y] = line.split(' ').map(Number);
+            return {x, y};
+        });
 
-  <section class="hero">
+        const container = document.getElementById(container_id);
+        // Loop through keypoints and generate the keypoint divs
+        keypoints.forEach((keypoint, index) => {
+            const keypointNumber = document.createElement('div');
+            keypointNumber.classList.add('keypoint-number');
+            keypointNumber.textContent = index + 1;
+            keypointNumber.style.left = `calc(${(keypoint.x / 1152) * 100}%)`;
+            keypointNumber.style.bottom = `calc(${(keypoint.y / 768) * 100}%)`;
+            container.appendChild(keypointNumber);
+        });
+        keypoints.forEach((keypoint, index) => {
+            const keypointDiv = document.createElement('div');
+            keypointDiv.classList.add('keypoint');
+            keypointDiv.style.left = `calc(${(keypoint.x / 1152) * 100}%)`;
+            keypointDiv.style.bottom = `calc(${(keypoint.y / 768) * 100}%)`;
+            keypointDiv.setAttribute('data-description', descriptions[index]);
+            container.appendChild(keypointDiv);
+        });
+    }
+</script>
+
+<!--Title-->
+<section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -85,17 +137,6 @@
 
             <div class="column has-text-centered">
               <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-<!--                      <span class="link-block">-->
-<!--                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"-->
-<!--                        class="external-link button is-normal is-rounded is-dark">-->
-<!--                        <span class="icon">-->
-<!--                          <i class="fas fa-file-pdf"></i>-->
-<!--                        </span>-->
-<!--                        <span>Paper</span>-->
-<!--                      </a>-->
-<!--                    </span>-->
-
                   <!-- Github link -->
                   <span class="link-block">
                     <a href="https://github.com/jsaric/sparus-ld" target="_blank"
@@ -106,25 +147,12 @@
                     <span>Code</span>
                   </a>
                 </span>
-<!--                     Supplementary PDF link -->
                 <span class="link-block">
                   <a href="#Dataset" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-database"></i>
-                  </span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-                <!-- ArXiv abstract Link -->
-<!--                <span class="link-block">-->
-<!--                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"-->
-<!--                  class="external-link button is-normal is-rounded is-dark">-->
-<!--                  <span class="icon">-->
-<!--                    <i class="ai ai-arxiv"></i>-->
-<!--                  </span>-->
-<!--                  <span>arXiv</span>-->
-<!--                </a>-->
-<!--              </span>-->
+                    <span class="icon"><i class="fas fa-database"></i></span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
             </div>
           </div>
         </div>
@@ -132,7 +160,7 @@
     </div>
   </div>
 </section>
-
+<!--End Title-->
 
 <!-- Teaser video-->
 <section class="hero teaser">
@@ -159,8 +187,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-The gilthead seabream training dataset consists of 1,084 adult specimens collected from three distinct origins along the eastern Adriatic Sea as part of the AQUAPOP project (https://jadran.izor.hr/~tsegvic/aquapop/): wild (XXX specimens), farm-associated (XXX specimens), and farmed (XXX specimens). Upon completion of the AQUAPOP project, an additional 720 adult specimens were collected from the same geographical area in the period 2017 to 2022. The dataset consists of 206 farm-associated specimens, 324 farmed specimens, 190 wild specimens of gilthead seabream and was designated as the test set.
-Although the present study focuses on a single species, the dataset presents a challenge for automatic landmark placement due to the subtle but important morphological differences between the three origins (Šegvić-Bubić et al., 2014; Talijančić et al., 2019; 2021). Wild gilthead seabream typically has an elongated, spindle-shaped body form with a larger head profile and a subterminal positioned mouth while farm-associated specimens have a bulkier body, lower positioned nape and a thicker trunk area. Farmed specimens have the most pronounced morphology, characterized by a stockier body with contracted trunks and head regions. These origin-specific morphological differences are influenced by environmental conditions, feeding behaviour and genetic factors arising from different rearing conditions and selective breeding programs (Šegvić-Bubić et al., 2014; Žužul et al., 2019; Talijančić et al., 2019; 2021) and pose a complex problem that challenges both automated and manual digitization methods in terms of appropriate landmark placement. Classification of gilthead seabream based on their origin is further complicated by the species pronounced plasticity which allows for adaptive phenotypic responses to changing environmental conditions. Such trait by itself sets gilthead seabream apart from other aquaculture-relevant fish species just in terms of the sheer magnitude of possible morphological expressions, e.g. head profiles (Brown, 2004). Consequently, increased variability can obscure the identification of homologous landmarks which represent a critical aspect in the design of any geometric morphometrics study (Zelditch et al., 2012). In the context of exploring intraspecific variation in fish species, the dataset used in the present study can serve as a starting point for robust assessment and comparison of measurement errors in landmark placement between automated machine-learning models and human digitization performance.
+            The <strong>SPARUS-LD dataset</strong> is the input for geometric morphometric analysis of gilthead seabream body shape and serves as a valuable resource for the <strong>assessment of measurement error</strong> in landmark digitization. To address the subjectivity and inconsistencies in manual annotation, a <strong>deep learning model</strong> was developed to standardize the process. The performance of the model was evaluated against human operators with different levels of experience by comparing <strong>automated and manually</strong> digitized landmarks in a test dataset. This approach not only quantifies the measurement error, but also examines how the operators experience affects its magnitude. The machine learning model provides an <strong>objective and repeatable</strong> method that minimizes human error and reduces variability in digitization. The SPARUS-LD dataset highlights the challenges posed by <strong>morphological variation</strong> in fish species and demonstrates the importance of validating automated methods against human performance. It serves as an essential resource for assessing the reliability and accuracy of both manual and automated landmark placement in the context of <strong>geometric morphometrics</strong>  and contributes to the ongoing development of more robust morphometric analysis methods.
           </p>
         </div>
       </div>
@@ -169,156 +196,17 @@ Although the present study focuses on a single species, the dataset presents a c
 </section>
 <!-- End paper abstract -->
 
-
-<!-- Image carousel -->
-<!--<section class="hero is-small">-->
-<!--  <div class="hero-body">-->
-<!--    <div class="container">-->
-<!--      <div id="results-carousel" class="carousel results-carousel">-->
-<!--       <div class="item">-->
-<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
-<!--        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>-->
-<!--        <h2 class="subtitle has-text-centered">-->
-<!--          First image description.-->
-<!--        </h2>-->
-<!--      </div>-->
-<!--      <div class="item">-->
-<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
-<!--        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>-->
-<!--        <h2 class="subtitle has-text-centered">-->
-<!--          Second image description.-->
-<!--        </h2>-->
-<!--      </div>-->
-<!--      <div class="item">-->
-<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
-<!--        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>-->
-<!--        <h2 class="subtitle has-text-centered">-->
-<!--         Third image description.-->
-<!--       </h2>-->
-<!--     </div>-->
-<!--     <div class="item">-->
-<!--      &lt;!&ndash; Your image here &ndash;&gt;-->
-<!--      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>-->
-<!--      <h2 class="subtitle has-text-centered">-->
-<!--        Fourth image description.-->
-<!--      </h2>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<!--<section class="hero is-small is-light">-->
-<!--  <div class="hero-body">-->
-<!--    <div class="container">-->
-<!--      &lt;!&ndash; Paper video. &ndash;&gt;-->
-<!--      <h2 class="title is-3">Video Presentation</h2>-->
-<!--      <div class="columns is-centered has-text-centered">-->
-<!--        <div class="column is-four-fifths">-->
-<!--          -->
-<!--          <div class="publication-video">-->
-<!--            &lt;!&ndash; Youtube embed code here &ndash;&gt;-->
-<!--            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<!--<section class="hero is-small">-->
-<!--  <div class="hero-body">-->
-<!--    <div class="container">-->
-<!--      <h2 class="title is-3">Another Carousel</h2>-->
-<!--      <div id="results-carousel" class="carousel results-carousel">-->
-<!--        <div class="item item-video1">-->
-<!--          <video poster="" id="video1" autoplay controls muted loop height="100%">-->
-<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
-<!--            <source src="static/videos/carousel1.mp4"-->
-<!--            type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-video2">-->
-<!--          <video poster="" id="video2" autoplay controls muted loop height="100%">-->
-<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
-<!--            <source src="static/videos/carousel2.mp4"-->
-<!--            type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-video3">-->
-<!--          <video poster="" id="video3" autoplay controls muted loop height="100%">\-->
-<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
-<!--            <source src="static/videos/carousel3.mp4"-->
-<!--            type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<!--<section class="hero is-small is-light">-->
-<!--  <div class="hero-body">-->
-<!--    <div class="container">-->
-<!--      <h2 class="title">Poster</h2>-->
-
-<!--      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">-->
-<!--          </iframe>-->
-<!--        -->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
-<!--End paper poster -->
-
-
-<!--BibTex citation -->
-  <section class="section" id="Dataset">
+<section class="section" id="Dataset">
     <div class="container is-max-desktop content">
-      <h2 class="title">Dataset</h2>
+        <h2 class="title">Dataset description</h2>
         <p>
           <strong>SPARUS-LD</strong> dataset contains <strong>2053 high-resolution images</strong>
           of gilthead seabream (Sparus aurata) specimens
           annotated with <strong>18 landmarks/keypoints</strong>.
             Additionally, each specimen is associated with one of the <strong>three classes</strong> according to its origin:
             <strong>wild</strong>, <strong>farmed</strong>, or <strong>farm-associated</strong>.
-          Descriptions of the landmarks are as follows:
-      <ol>
-          <li>anterior tip of snout at the upper jaw</li>
-          <li>vertical point above the most anterior point in the eye</li>
-          <li>anterior insertion of the dorsal fin</li>
-          <li>last spiny ray of the dorsal fin</li>
-          <li>posterior insertion of the dorsal fin</li>
-          <li>dorsal point at the least depth of the caudal peduncle</li>
-          <li>posterior body extremity</li>
-          <li>ventral point at the least depth of the caudal peduncle</li>
-          <li>posterior insertion of the anal fin</li>
-          <li>anterior insertion of the anal fin</li>
-          <li>insertion of the pelvic fin</li>
-          <li>ventral tip of the insertion of the operculum on the lateral profile</li>
-          <li>point of maximum extension of the operculum on the lateral profile</li>
-          <li>anterior extremity of the lateral line on the head profile</li>
-          <li>dorsal insertion of the pectoral fin</li>
-          <li>ventral insertion of the pectoral fin</li>
-          <li>the most anterior point in the eye</li>
-          <li>the most posterior point in the eye</li>
-        </ol>
-      </p>
-      <p>
+        </p>
+        <p>
         We split the dataset into training, validation and test sets. The table below shows the distribution of origin in each set.
         <table class="table is-fullwidth">
             <thead>
@@ -357,14 +245,103 @@ Although the present study focuses on a single species, the dataset presents a c
             </tbody>
         </table>
         </p>
-        <p>
-            The downsampled version of the dataset (images resized to 1152x768 pixels) is available for download at the following link:
-            <a href="https://drive.google.com/file/d/1" target="_blank">SPARUS-LD Dataset</a>
-            <br>If you are interested in the dataset with full resolution images (5184x3456 pixels), please contact us via <a href="mailto:josipx.saricx@xferx.hr"
-    onmouseover="this.href=this.href.replace(/x/g,'');">e-mail</a>.
+        <strong>Landmarks</strong> are defined as follows:
+        <div class="columns">
+            <div class="column">
+                <ol>
+                    <li>anterior tip of snout at the upper jaw</li>
+                    <li>vertical point above the most anterior point in the eye</li>
+                    <li>anterior insertion of the dorsal fin</li>
+                    <li>last spiny ray of the dorsal fin</li>
+                    <li>posterior insertion of the dorsal fin</li>
+                    <li>dorsal point at the least depth of the caudal peduncle</li>
+                    <li>posterior body extremity</li>
+                    <li>ventral point at the least depth of the caudal peduncle</li>
+                    <li>posterior insertion of the anal fin</li>
+                     <li>anterior insertion of the anal fin</li>
+                </ol>
+            </div>
+            <div class="column">
+                <ol start="11">
+                  <li>insertion of the pelvic fin</li>
+                  <li>ventral tip of the insertion of the operculum on the lateral profile</li>
+                  <li>point of maximum extension of the operculum on the lateral profile</li>
+                  <li>anterior extremity of the lateral line on the head profile</li>
+                  <li>dorsal insertion of the pectoral fin</li>
+                  <li>ventral insertion of the pectoral fin</li>
+                  <li>the most anterior point in the eye</li>
+                  <li>the most posterior point in the eye</li>
+                </ol>
+            </div>
+        </div>
+        <p>Below you can see a couple of examples from our dataset. Hover over the keypoint for description.</p>
+    </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+        <div id="results-carousel" class="carousel results-carousel centered">
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont1">
+                <img src="static/images/wild1.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/wild1.txt", "ex-cont1")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Wild specimen of Gilthead seabream from the train set.</h2>
+          </div>
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont2">
+                <img src="static/images/wild2.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/wild2.txt", "ex-cont2")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Wild specimen of Gilthead seabream from the train set.</h2>
+          </div>
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont3">
+                <img src="static/images/farmassoc1.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/farmassoc1.txt", "ex-cont3")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Farm-associated specimen of Gilthead seabream from the train set.</h2>
+          </div>
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont4">
+                <img src="static/images/farmassoc2.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/farmassoc2.txt", "ex-cont4")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Farm-associated specimen of Gilthead seabream from the train set.</h2>
+          </div>
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont5">
+                <img src="static/images/farmed1.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/farmed1.txt", "ex-cont5")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Farmed specimen of Gilthead seabream from the train set.</h2>
+          </div>
+          <div class="item">
+            <div class="container is-max-desktop" id="ex-cont6">
+                <img src="static/images/farmed2.JPG" alt="MY ALT TEXT" style="width: 100%; height: auto;">
+                <script>load_and_show_keypoints("static/keypoints/farmed2.txt", "ex-cont6")</script>
+            </div>
+              <h2 class="subtitle has-text-centered">Farmed specimen of Gilthead seabream from the train set.</h2>
+          </div>
+      </div>
+    </div>
+</div>
+</div>
+</section>
+
+<section class="section" id="dataset-dl">
+    <div class="container is-max-desktop content">
+        <h2 class="title">Dataset download</h2>
+        <p>The downsampled version of the dataset (images resized to 1152x768 pixels) is available for download at the following <a href="https://drive.google.com/file/d/1" target="_blank">link</a>.
+        <br>If you are interested in the dataset with full resolution images (5184x3456 pixels), please contact us via
+        <a href="mailto:josipx.saricx@xferx.hr" onmouseover="this.href=this.href.replace(/x/g,'');">e-mail</a>.
         </p>
     </div>
 </section>
+
+
+
 
 <!--BibTex citation -->
 
@@ -390,7 +367,6 @@ Although the present study focuses on a single species, the dataset presents a c
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-
           <p>
             This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page. Fish icons created by <a href="https://www.flaticon.com/free-icons/fish" title="fish icons"> Smashicons - Flaticon</a>.
           </p>
@@ -401,7 +377,7 @@ Although the present study focuses on a single species, the dataset presents a c
 </footer>
 
 <!-- Statcounter tracking code -->
-  
+
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->

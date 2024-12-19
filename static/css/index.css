@@ -133,5 +133,46 @@ body {
   font-size: smaller;
 }
 
+.keypoint {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #80ff00;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    cursor: pointer;
+    z-index: 10;
+}
+.keypoint-number {
+    position: absolute;
+    color: #80ff00;
+    font-size: 20px;
+    font-weight: bold;
+    transform: translate(-25%, -10%);
+    pointer-events: none;
+    z-index: 5;
+    /*-webkit-text-stroke: 1px #4d9900;*/
+}
+.keypoint::after {
+    content: attr(data-description);
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-20%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 16px;
+    white-space: pre-line;
+    display: none;
+    z-index: 100;
+    width: 150px;
+}
+.keypoint:hover::after {
+    display: block;
+}
 
-
+.keypoint:hover{
+    z-index: 101;
+}
