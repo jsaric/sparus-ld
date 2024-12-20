@@ -38,7 +38,7 @@ Dataset structure should look like this:
 
 ## Evaluation
 
-To evaluate our pretrained model available [here](link), run the following command:
+To evaluate our pretrained model available [here](https://drive.google.com/file/d/1Fvlg2fNOKv7CcxRXcavuAeqPCteUfkBp/view?usp=drive_link), run the following command:
 ```sh
 python train.py --config-file configs/r18_spaur_1152x768.yaml --eval-only --model-weights /path/to/weights.pth OUTPUT_DIR /path/to/output_dir
 ```
