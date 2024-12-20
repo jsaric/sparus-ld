@@ -107,13 +107,6 @@ class SPAURKeypointDataset(Dataset):
         return datum
 
 
-def draw_keypoints(fish_image, keypoints, ps=30):
-    draw = ImageDraw.Draw(fish_image)
-    for keypoint in keypoints:
-        draw.ellipse([tuple(keypoint - ps), tuple(keypoint + ps)], fill=(255, 0, 0))
-    return fish_image
-
-
 if __name__ == '__main__':
     dataset = SPAURKeypointDataset(
         root_path='/mnt/sdb1/datasets/izor22data-new/res_1152x768/',

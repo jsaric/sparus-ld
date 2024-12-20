@@ -39,12 +39,12 @@ class EuclideanDistanceEvaluator(Evaluator):
     def nice_print(self, results):
         print(f"Per keypoint distance:")
         for i, keypoint_name in enumerate(self.keypoint_names):
-            print(f"{i+1}.\t{keypoint_name:<25} {results[f'{keypoint_name}_pixel_distance']:0.3f}")
-        print(f"Average keypoint distance: \t {results['pixel_distance']:0.3f}")
+            print(f"{i+1}.\t{keypoint_name:<25}: {results[f'{keypoint_name}_pixel_distance']:0.2f} px")
+        print(f"Average keypoint distance: \t {results['pixel_distance']:0.2f} px")
         print(f"Per keypoint metric distance:")
         for i, keypoint_name in enumerate(self.keypoint_names):
-            print(f"{i+1}.\t{keypoint_name:<25} {results[f'{keypoint_name}_metric_distance']:0.3f}")
-        print(f"Average keypoint metric distance: \t {results['metric_distance']:0.3f}")
+            print(f"{i+1}.\t{keypoint_name:<25}: {results[f'{keypoint_name}_metric_distance'] * 10:0.2f} mm")
+        print(f"Average keypoint metric distance: \t {results['metric_distance'] * 10:0.2f} mm")
 
     def reset(self):
         self.pixel_distance = np.zeros(self.num_keypoints)

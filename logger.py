@@ -18,9 +18,3 @@ class Logger:
             file.write(line_to_write)
         if print_to_console:
             print(line_to_write, end='')
-    #
-    # def log_precisions_per_keypoint(self, precisions: torch.tensor):
-    #     text = 'precisions per keypoint: '
-    #     for name, precision in zip(keypoint_names_sorted, precisions):
-    #         text += f'{name}={precision:.2f} '
-    #     self.log(text)
