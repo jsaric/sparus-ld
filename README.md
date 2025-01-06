@@ -1,3 +1,6 @@
+# SPARUS-LD: Gilthead Seabream (Sparus aurata) Landmark Detection
+This repository contains code for training and evaluating SwiftNet-LD model for landmark detection of gilthead seabream.
+
 ## Environment Setup
 
 1. Create a new conda environment with Python 3.11:
