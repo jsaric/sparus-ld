@@ -184,4 +184,3 @@ if __name__ == "__main__":
         trainer.logger.log(trainer.evaluate())
     else:
         trainer.train()
-

@@ -89,7 +89,9 @@ _C.MODEL.DECODER.SWIFTNET_DECODDER.SPP_LEVEL_SIZE = 128
 
 _C.EVALUATION = CN()
 _C.EVALUATION.EVALUATORS = ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
-_C.EVALUATION.TPS_SAVER_SCALING_FACTOR = 1.0
+_C.EVALUATION.TPS_SAVER_SCALING_FACTOR = None
+_C.EVALUATION.TPS_SAVER_IMG_ORIG_RES_FOLDER = None
+_C.EVALUATION.SAVE_HEATMAPS_VIS = False
 
 
 

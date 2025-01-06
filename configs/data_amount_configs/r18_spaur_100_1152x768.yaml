@@ -45,5 +45,6 @@ LOSS:
   TYPE: "bce"
   TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
-EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator")
+EVALUATION:
+  EVALUATORS: ("euclidean_distance_evaluator", "keypoint_similarity_evaluator")
 OUTPUT_DIR: "output/testing"

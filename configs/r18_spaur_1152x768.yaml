@@ -8,7 +8,7 @@ DATASETS:
   TRAIN: "SPAUR_1152x768"
   TRAIN_SPLIT: "train"
   VAL: "SPAUR_1152x768"
-  VAL_SPLIT: "val"
+  VAL_SPLIT: "val" # "test"
 INPUT:
   SIZE: [768, 1152]
   CROP_TYPE: "random"
@@ -41,10 +41,12 @@ TRAINER:
   LOG_INTERVAL: 20
   CHECKPOINT_INTERVAL: 2500
   ITERATIONS: 30000
+  MS_EVAL: False
 LOSS:
   TYPE: "bce"
   TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
 EVALUATION:
-  EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
-OUTPUT_DIR: "output/r18_spaur_1152x768_bce_all_jitter_hpm010"
+  EVALUATORS: ("euclidean_distance_evaluator", "keypoint_similarity_evaluator") #  "visualization_evaluator", "tps_file_saver"
+  SAVE_HEATMAPS_VIS: False
+OUTPUT_DIR: "output/test"

@@ -4,9 +4,12 @@ MODEL:
     ResNet:
       DEPTH: 18
       WEIGHTS: "IMAGENET1K_V1"
+  DECODER:
+    TYPE: "UperNet"
+    DECODER_CHANNELS: 64
 DATASETS:
   TRAIN: "SPAUR_1152x768"
-  TRAIN_SPLIT: "train_750"
+  TRAIN_SPLIT: "train"
   VAL: "SPAUR_1152x768"
   VAL_SPLIT: "val"
 INPUT:
@@ -40,11 +43,11 @@ TRAINER:
   EVAL_INTERVAL: 2500
   LOG_INTERVAL: 20
   CHECKPOINT_INTERVAL: 2500
-  ITERATIONS: 20000
+  ITERATIONS: 30000
 LOSS:
   TYPE: "bce"
   TOP_K_PERCENT_PIXELS: 0.10
   SIGMA: 7.0
 EVALUATION:
-  EVALUATORS: ("euclidean_distance_evaluator", "keypoint_similarity_evaluator")
-OUTPUT_DIR: "output/r18_spaur_train_750_1152x768_bce_all_jitter_hpm010"
+  EVALUATORS: ("euclidean_distance_evaluator", "visualization_evaluator", "keypoint_similarity_evaluator", "tps_file_saver")
+OUTPUT_DIR: "output/r18_upernet_spaur_1152x768_bce_all_jitter_hpm010"
