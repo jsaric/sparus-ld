@@ -20,7 +20,7 @@ This repository contains code for training and evaluating SwiftNet-LD model for 
 
 ## Data Preparation
 
-1. Download the dataset from the following [link](link).
+1. Download the dataset from the following [link](https://drive.google.com/file/d/1KlV0TO5VgDbRBEn8c9R07mj3s81KlK-b/view?usp=sharing).
 2. Extract the contents of the downloaded file to the datasets directory.
 
 Dataset structure should look like this:
