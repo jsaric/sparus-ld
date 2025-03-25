@@ -73,3 +73,6 @@ python run_playground.py
 There you can see how the prediction and confidence of logistic regression origin classifier changes by adjusting 
 individual keypoints.  
 <img src="./cls-playground/playground_teaser.gif">
+
+## Acknowledgments
+This research has been fully supported by Croatian Science Foundation under the project IP-2022-10-7232 Enhancing Environmental Performance of Net-Pen Marine Aquaculture. Josip Šarić is supported by the European Union's Horizon Europe research and innovation programme under the Marie Skłodowska-Curie Postdoctoral Fellowship Programme, SMASH co-funded under the grant agreement No. 101081355. The SMASH project is co-funded by the Republic of Slovenia and the European Union from the European Regional Development Fund.
