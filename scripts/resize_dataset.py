@@ -34,7 +34,7 @@ def rescale_image_and_update_tps(tps_example, src_images_path, dest_images_path,
 
 
 def resize_dataset(root_src, root_dest, larger_side_size):
-    for split in ["baseline", "train", "val", "test"]:
+    for split in ["train", "val", "test"]:
         print("Processing split: ", split)
         src_root_path = Path(root_src)
         src_images_path = src_root_path / split
