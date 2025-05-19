@@ -20,8 +20,9 @@ This repository contains code for training and evaluating SwiftNet-LD model for 
 
 ## Data Preparation
 
-1. Download the dataset from the following [link](https://drive.google.com/file/d/1KlV0TO5VgDbRBEn8c9R07mj3s81KlK-b/view?usp=sharing).
+1. Download the dataset from the following [link](https://zenodo.org/records/15275775).
 2. Extract the contents of the downloaded file to the datasets directory.
+3. Run the resize_dataset script to generate the downsampled version of the dataset: ```python -m scripts.resize_dataset <input_path/to/SPAUR/res_5184x3456> <output_path/to/SPAUR/res_1152x768> 1152```
 
 Dataset structure should look like this:
 ```
